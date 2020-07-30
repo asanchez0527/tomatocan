@@ -4,8 +4,16 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
+
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require recurring_select
-//= require_tree .
+//= require accordian.js
+//= require analytics.js
+//= require autofill.js
+//= require countdown_clock.js
+//= require hideUploaders.js
+//= require livestream.js
+//= require moreorless.js
+//= require popovers.js
+//= require purchases.js

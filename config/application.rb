@@ -16,6 +16,7 @@ Bundler.require(*Rails.groups)
 module Crowdpublishtv
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/lib) # add this line
+    config.generators.javascript_engine = :js
 
     # Config for apis.
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
@@ -30,7 +31,7 @@ module Crowdpublishtv
     end
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+    config.load_defaults 6.0
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -41,5 +42,9 @@ module Crowdpublishtv
     config.assets.enabled = true
 #    Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
     config.assets.paths << "#{Rails.root}/app/assets/video"
+
+    config.assets.configure do |env|
+      env.register_mime_type('application/manifest+json', extensions: ['.webmanifest'])
+    end
   end
 end

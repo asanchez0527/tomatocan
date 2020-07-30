@@ -1,45 +1,45 @@
 source 'https://rubygems.org'
 
-ruby "2.7.0"
+ruby '2.7.0'
 
-gem "rails", "~> 6"
-gem "sprockets", "~> 3"
-gem "listen"
-gem "pg"
-gem "stripe"
-gem "omniauth-google-oauth2"
+gem 'rails', '~> 6'
+gem 'listen'
+gem 'pg'
+gem 'stripe'
+gem 'omniauth-google-oauth2'
 gem 'bootstrap-sass'
 gem 'uglifier'
-gem "puma"
+gem 'puma'
 gem 'capistrano'
 gem 'capistrano-rails'
 gem 'capistrano-passenger'
 gem 'capistrano-rbenv'
-gem "capistrano-bundler"
-gem "carrierwave-aws"
-gem "sass-rails"
-gem "ed25519"
-gem "mandrill"
-gem "devise"
-gem "fog-aws"
-gem "unf"
-gem "omniauth"
-gem "omniauth-facebook"
-gem "koala"
-gem "simple_calendar"
-gem "rack-cors"
-gem "font-awesome-rails"
-gem "pry"
-gem "bcrypt"
-gem "bcrypt_pbkdf"
-gem "turbolinks"
-gem "autoprefixer-rails"
-gem "will_paginate"
-gem "will_paginate-bootstrap"
-gem "jquery-rails"
-gem "coffee-rails"
+gem 'capistrano-bundler'
+gem 'carrierwave-aws'
+gem 'sass-rails'
+gem 'ed25519'
+gem 'mandrill'
+gem 'devise'
+gem 'fog-aws'
+gem 'unf'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'koala'
+gem 'simple_calendar'
+gem 'rack-cors'
+gem 'font-awesome-rails'
+gem 'pry'
+gem 'bcrypt'
+gem 'bcrypt_pbkdf'
+gem 'turbolinks'
+gem 'autoprefixer-rails'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+gem 'jquery-rails'
+gem 'coffee-rails'
 gem 'friendly_id'
 gem 'recurring_select'
+gem 'webpacker'
 
 group :test, :development do
   gem 'minitest'

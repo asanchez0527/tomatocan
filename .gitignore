@@ -29,3 +29,17 @@ config/environments/development.rb
 config/deploy
 config/deploy.rb
 Capfile
+
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
