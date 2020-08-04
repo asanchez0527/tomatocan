@@ -1,6 +1,6 @@
-<% if user_signed_in? %>
-  <% ActionCable.server.broadcast "viewer_channel", content: {user: current_user.id, room: params[:chatrm]} %>
+<% ActionCable.server.broadcast "viewer_channel", content: {user: current_user.id, room: params[:chatrm]} %>
 
+<% if user_signed_in? %>
   <!-- Update list of users attending the conversation -->
   <div class = "container-fluid">
   <% content_for :head do %>
