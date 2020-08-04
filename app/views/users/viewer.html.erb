@@ -1,4 +1,3 @@
-<% ActionCable.server.broadcast "viewer_channel", content: {user: current_user.id, room: params[:chatrm]} %>
 
 <% if user_signed_in? %>
   <!-- Update list of users attending the conversation -->
@@ -103,9 +102,14 @@
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   var current_user = "<%= current_user.id %>"
+  var owner = "<%= @user.id %>"
+
+  $(document).ready(() => {
+    $.post("/users/load", {room: urlParams.get('chatrm'), user: current_user, owner: owner})
+  })
 
   function loadAttendees(){
-    $.get("/conversations/attendees", {room: urlParams.get('chatrm'), user: "<%= current_user.id %>", owner: "<%= @user.id %>"}, (data) => {
+    $.get("/conversations/attendees", {room: urlParams.get('chatrm'), user: current_user, owner: owner}, (data) => {
       if (data.success == true)
         $('#attendees').html(data.html)
     })
@@ -115,4 +119,5 @@
     $.post("/users/unload", {user: current_user, room: urlParams.get('chatrm')})
   });
 
+  loadAttendees()
 </script>

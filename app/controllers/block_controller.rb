@@ -1,4 +1,8 @@
 class BlockController < ApplicationController
+    def load
+        ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
+    end
+
     def inViewer
         current_user = User.find_by_id(params[:user])
         current_user.update_column(:last_viewed, current_user.last_viewed << params[:room])
