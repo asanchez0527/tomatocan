@@ -1,8 +1,3 @@
-<% content_for :page_scripts do %>
-  <%= javascript_include_tag "viewer.js" %>
-<% end %>
-  
-
 <% if user_signed_in? %>
   <% ActionCable.server.broadcast "viewer_channel", content: {user: current_user.id, room: params[:chatrm]} %>
 
@@ -101,6 +96,25 @@
       </div>
     </div>
   </div>
+
 <% else %>
   <meta http-equiv="refresh" content="0; URL=/login"/>
 <% end %>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  var current_user = "<%= current_user.id %>"
+
+  function loadAttendees(){
+    $.get("/conversations/attendees", {room: urlParams.get('chatrm'), user: "<%= current_user.id %>", owner: "<%= @user.id %>"}, (data) => {
+      if (data.success == true)
+        $('#attendees').html(data.html)
+    })
+  }
+
+  $(window).on('beforeunload', () => {
+    $.post("/users/unload", {user: 2, room: urlParams.get('chatrm')})
+  });
+
+  loadAttendees()
+</script>
