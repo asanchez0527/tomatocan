@@ -1,6 +1,7 @@
 class BlockController < ApplicationController
     def inViewer
-        
+        current_user = User.find_by_id(params[:user])
+        current_user.update_column(:last_viewed, current_user.last_viewed << params[:room])
     end
 
     def block

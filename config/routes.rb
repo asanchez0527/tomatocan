@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   match '/:permalink/dashboard'      => "users#dashboard",      :as => :user_dashboard, via: 'get'
   post '/:permalink/markfulfilled'   => 'users#markfulfilled',  :as => :markfulfilled_user
 
+  post '/users/inviewer'             => "block#inViewer"
   post '/users/block'                => "block#block"
   post '/users/unblock'              => "block#unblock"
   post '/users/unload'               => "block#unload"
