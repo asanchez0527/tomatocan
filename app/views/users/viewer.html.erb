@@ -108,16 +108,7 @@
     $.post("/users/load", {room: urlParams.get('chatrm'), user: current_user, owner: owner})
   })
 
-  function loadAttendees(){
-    $.get("/conversations/attendees", {room: urlParams.get('chatrm'), user: current_user, owner: owner}, (data) => {
-      if (data.success == true)
-        $('#attendees').html(data.html)
-    })
-  }
-
   $(window).on('beforeunload', () => {
     $.post("/users/unload", {user: current_user, room: urlParams.get('chatrm')})
   });
-
-  loadAttendees()
 </script>
