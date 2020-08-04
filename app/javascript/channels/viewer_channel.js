@@ -12,5 +12,8 @@ consumer.subscriptions.create("ViewerChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
+    if (data.content == "Conversation") {
+      $.post("")
+    }
   }
 });

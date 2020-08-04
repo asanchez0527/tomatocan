@@ -4,6 +4,7 @@
   
 
 <% if user_signed_in? %>
+  <% ActionCable.server.broadcast "viewer_channel", content: params[:chatrm] %>
   <% current_user.update_column(:last_viewed, current_user.last_viewed << params[:event]) %>
 
   <!-- Update list of users attending the conversation -->
