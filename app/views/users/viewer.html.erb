@@ -53,9 +53,9 @@
           <div class="panel-heading" style="margin-bottom:-10px">
             <% if @user.name.length >= 17 %>
             <% name = @user.name[0..15] + "..." %>
-              Attendees of <%= name %>'s conversation <button id="refresh" style="color:black; float:right; margin-top:-3px">&#8634</button>
+              Attendees of <%= name %>'s conversation 
             <% else %>
-              Attendees of <%= @user.name %>'s conversation <button id="refresh" style="color:black; float:right; margin-top:-3px">&#8634</button>
+              Attendees of <%= @user.name %>'s conversation 
             <% end %>
           </div>
           <div id="attendees"></div>
@@ -64,7 +64,6 @@
     </div>
 
     <div class="col-md-9">
-      <%= render 'layouts/jitsi' %>
       <% if @otherconvos.present? %>
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -113,8 +112,7 @@
   }
 
   $(window).on('beforeunload', () => {
-    $.post("/users/unload", {user: 2, room: urlParams.get('chatrm')})
+    $.post("/users/unload", {user: current_user, room: urlParams.get('chatrm')})
   });
 
-  loadAttendees()
 </script>
