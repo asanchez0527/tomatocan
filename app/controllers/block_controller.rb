@@ -1,4 +1,8 @@
 class BlockController < ApplicationController
+    def inViewer
+        
+    end
+
     def block
         # get person to block and owner of convo
         to_block = User.find_by_id(params[:to_block])

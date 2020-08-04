@@ -7,7 +7,7 @@
     <meta property="og:title"         content="Discover Activism that makes you THINQ" />
     <meta property="og:description"   content="Discover Activism that makes you THINQ: Grassroots movements to motivate people through small group video conversations." />
     <meta property="og:image"         content="http://www.thinq.tv/logoDigitalHollow300.png" />
-    
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,8 +16,8 @@
 
     <title><%= full_title(yield(:title)) %></title>
     <%= stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track': 'reload'  %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "https://js.stripe.com/v2/", 'application', 'data-turbolinks-track' => true %>
 
     <link rel="shortcut icon" type="favicon.ico" href='<%= image_tag "starIcon.png", width: "100%" %>'>
 
@@ -52,7 +52,7 @@
 
         <%= render 'layouts/header' %>
 
-        <main class="container-fluid" id="homeWrapper">
+        <main id="homeWrapper">
             <%= yield %>
         </main>
 
