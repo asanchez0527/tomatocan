@@ -1,5 +1,5 @@
-<% users = User.where('last_viewed @> ARRAY[?]::integer[]', [params[:event]]) %>
-<% current_user = User.find_by_id(params[:currentUser]) %>
+<% users = User.where('last_viewed @> ARRAY[?]::text[]', [params[:room]]) %>
+<% current_user = User.find_by_id(params[:user]) %>
 <% @user = User.find_by_id(params[:owner]) %>
 
 <% user_array = [] %>
