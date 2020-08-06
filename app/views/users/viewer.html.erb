@@ -97,6 +97,14 @@
     </div>
   </div>
 
+  <script>
+  $(window).on('beforeunload', (event) => {
+      // remove user from attendees list
+      $.post("/users/unload", {user: "<%= current_user.id %>", room: "<%= params[:chatrm] %>"})
+      console.log("User Unloaded")
+    });
+  </script>
+
 <% else %>
   <meta http-equiv="refresh" content="0; URL=/login"/>
 <% end %>

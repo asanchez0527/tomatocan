@@ -10,7 +10,3 @@ $(document).ready(() => {
 
   $.post("/users/load", { room: room, user: current_user, owner: owner })
 })
-
-$(window).on('beforeunload', () => {
-  $.post("/users/unload", { user: current_user, room: room })
-});
