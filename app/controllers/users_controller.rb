@@ -145,7 +145,7 @@ class UsersController < ApplicationController
     if Rails.env.development? || Rails.env.test?
       client = OAuth2::Client.new(STRIPE_CONNECT_CLIENT_ID, STRIPE_SECRET_KEY, options)
     else
-      client = OAuth2::Client.new(ENV['STRIPE_CONNECT_CLIENT_ID'], ENV['STRIPE_SECRET_KEY'], options)
+      client = OAuth2::Client.new(Rails.application.credentials.STRIPE_CONNECT_CLIENT_ID, Rails.application.credentials.STRIPE_SECRET_KEY, options)
     end
 
     @resp = client.auth_code.get_token(code, :params => {:scope => 'read_write'})

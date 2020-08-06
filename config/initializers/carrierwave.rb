@@ -26,8 +26,8 @@ if Rails.env.production?
   CarrierWave.configure do |config|
     config.fog_credentials = {
       :provider                 => 'AWS',
-      :aws_access_key_id        => ENV['AWS_KEY'],          # DO NOT CHANGE VARIABLE NAME
-      :aws_secret_access_key    => ENV['AWS_SECRET_KEY'],   # DO NOT CHANGE VARIABLE NAME
+      :aws_access_key_id        => Rails.application.credentials.AWS_KEY,  # DO NOT CHANGE VARIABLE NAME
+      :aws_secret_access_key    => Rails.application.credentials.AWS_SECRET_KEY,  # DO NOT CHANGE VARIABLE NAME
       :persistent               => false,
 #     :connect_timeout          =>  60,
       :region                   => 'us-east-1'
@@ -35,7 +35,7 @@ if Rails.env.production?
 
     config.storage              = :fog
     config.permissions          = 0777                  
-    config.fog_directory        = ENV['AWS_BUCKET']
+    config.fog_directory        = Rails.application.credentials.AWS_BUCKET
     config.fog_public           = true
     config.fog_attributes       = {'Cache-Control'=>'max-age=315576000'}
 #   config.fog_host             = 'https://authorprofile.s3.amazonaws.com'

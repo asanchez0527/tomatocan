@@ -4,8 +4,8 @@ config.action_mailer.smtp_settings = {
    :address   => "smtp.gmail.com",
    :port      => 587, # ports 587 and 2525 are also supported with STARTTLS
    :enable_starttls_auto => true, # detects and uses STARTTLS
-   :user_name => ENV['EMAIL'],
-   :password  => ENV['GMAIL_PWD'], # SMTP password is any valid API key
+   :user_name => Rails.application.credentials.EMAIL,
+   :password  => Rails.application.credentials.GMAIL_PWD, # SMTP password is any valid API key
    :authentication => 'plain' # Mandrill supports 'plain' or 'login'
 #   :domain => 'www.ThinQ.tv', # your domain to identify your server when connecting
  }
