@@ -1,7 +1,9 @@
-
 <% if user_signed_in? %>
+  <%= javascript_pack_tag "viewer" %>
+
   <!-- Update list of users attending the conversation -->
   <div class = "container-fluid">
+  <%= content_tag :div, nil, id: "user_vars", data: {user: current_user.id, owner: @user.id, room: params[:chatrm]} %>
   <% content_for :head do %>
     <meta property="og:url"           content="<%= "https://www.thinq.tv" + user_profile_path(@user.permalink) %>" />
     <meta property="og:type"          content="website" />
@@ -98,26 +100,3 @@
 <% else %>
   <meta http-equiv="refresh" content="0; URL=/login"/>
 <% end %>
-
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  var current_user = "<%= current_user.id %>"
-  var owner = "<%= @user.id %>"
-
-  $(document).ready(() => {
-    $.post("/users/load", {room: urlParams.get('chatrm'), user: current_user, owner: owner})
-  })
-
-  function loadAttendees(){
-    $.get("/conversations/attendees", {room: urlParams.get('chatrm'), user: current_user, owner: owner}, (data) => {
-      if (data.success == true)
-        $('#attendees').html(data.html)
-    })
-  }
-
-  $(window).on('beforeunload', () => {
-    $.post("/users/unload", {user: current_user, room: urlParams.get('chatrm')})
-  });
-
-  loadAttendees()
-</script>
