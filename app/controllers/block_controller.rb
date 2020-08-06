@@ -1,15 +1,11 @@
 class BlockController < ApplicationController
     def load
-        # ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
-        ActionCable.server.broadcast "viewer_channel", content: {message: params[:message], user: params[:user]}
+        current_user = User.find_by_id(params[:user])
+        current_user.update_column(:last_viewed, current_user.last_viewed << params[:room])
+        ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
         head :ok
     end
               
-    def inViewer
-        current_user = User.find_by_id(params[:user])
-        current_user.update_column(:last_viewed, current_user.last_viewed << params[:room])
-        head :ok
-    end
 
     def block
         # get person to block and owner of convo
@@ -61,7 +57,7 @@ class BlockController < ApplicationController
         array = current_user.last_viewed
         array = array - [params[:room]]
         current_user.update({'last_viewed': array})
-        
+        ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
         # return 200 ok
         head :ok
     end
