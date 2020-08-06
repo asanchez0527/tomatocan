@@ -40,6 +40,7 @@ gem 'coffee-rails'
 gem 'friendly_id'
 gem 'recurring_select'
 gem 'webpacker'
+gem 'redis'
 
 group :test, :development do
   gem 'minitest'

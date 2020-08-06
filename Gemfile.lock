@@ -304,6 +304,7 @@ GEM
       jquery-rails (>= 3.0)
       rails (>= 3.2)
       sass-rails (>= 4.0)
+    redis (4.2.1)
     regexp_parser (1.7.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -415,6 +416,7 @@ DEPENDENCIES
   rails-controller-testing
   rails_real_favicon
   recurring_select
+  redis
   sass-rails
   selenium-webdriver
   simple_calendar
