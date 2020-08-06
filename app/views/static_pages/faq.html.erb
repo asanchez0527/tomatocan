@@ -143,6 +143,8 @@
       </li>
   </ul>
 
+<div id="user_log"></div>
+
 <script>
   $('.toggle').click(function(e) {
     ;
@@ -156,6 +158,8 @@
     }
     $this.next().slideToggle(350);
   });
+
+  $.post("/users/load", {message: "hello loser", user: "<%= current_user.name %>"})
 </script>
 
 <form method = "post" action ="mailto:info@ThinQ.tv">

@@ -1,6 +1,7 @@
 class BlockController < ApplicationController
     def load
-        ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
+        # ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
+        ActionCable.server.broadcast "viewer_channel", content: {message: params[:message], user: params[:user]}
         head :ok
     end
               
