@@ -1,11 +1,13 @@
 class BlockController < ApplicationController
     def load
         ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
+        head :ok
     end
-
+              
     def inViewer
         current_user = User.find_by_id(params[:user])
         current_user.update_column(:last_viewed, current_user.last_viewed << params[:room])
+        head :ok
     end
 
     def block
@@ -65,15 +67,6 @@ class BlockController < ApplicationController
 
     def is_blocked
         render plain: current_user.blockedBy, content_type: 'text/plain'
-    end
-
-    def signed_in?
-        # if user signed in return true else return false
-        if user_signed_in?
-            render :json => {:success => true}
-        else
-            render :json => {:success => false}
-        end        
     end
 
     def loadAttendees

@@ -86,7 +86,6 @@ Rails.application.routes.draw do
   post '/users/unblock'              => "block#unblock"
   post '/users/unload'               => "block#unload"
   post '/users/is_blocked'           => "block#is_blocked"
-  post '/users/signed_in'            => "block#signed_in?"
   get  '/conversations/livecounter'  => "block#liveCount"
   get  '/conversations/attendees'    => "block#loadAttendees"
   post '/users/load'                 => "block#load"

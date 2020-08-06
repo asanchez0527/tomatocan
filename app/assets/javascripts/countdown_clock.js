@@ -70,4 +70,3 @@ function initializeClockstudy(id, endtime) {
 
 var deadlinestudy = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
 initializeClockstudy('clockdivstudy', deadlinestudy);
-

@@ -12,12 +12,6 @@ consumer.subscriptions.create("ViewerChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
-    $.post("/users/inviewer", {user: data.content.user, room: data.content.room})
-
-    // $.get("/conversations/attendees", {room: data.content.room, user: data.content.user, owner: data.content.owner}, (data) => {
-    //   if (data.success == true)
-    //     $('#attendees').html(data.html)
-    // })
-    $("#attendees").innerHTML = "SUCK MY ASS"
+    console.log("omg i received data")
   }
 });
