@@ -1,8 +1,8 @@
-var current_user
-var owner
-var room
+var current_user;
+var owner;
+var room;
 
-$(document).on("turbolinks:load", () => {
+$(document).ready(() => {
   // get session variables
   current_user = $("#user_vars").data("user")
   owner = $("#user_vars").data("owner")
