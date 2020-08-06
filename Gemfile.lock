@@ -84,6 +84,10 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.15)
     bcrypt_pbkdf (1.0.1)
+    bootstrap (4.5.0)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
@@ -247,6 +251,7 @@ GEM
       omniauth (~> 1.9)
     orm_adapter (0.5.0)
     pg (1.2.3)
+    popper_js (1.16.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -373,6 +378,8 @@ GEM
     will_paginate (3.3.0)
     will_paginate-bootstrap (1.0.2)
       will_paginate (>= 3.0.3)
+    will_paginate-bootstrap4 (0.2.2)
+      will_paginate (~> 3.0, >= 3.0.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.4.0)
@@ -385,6 +392,7 @@ DEPENDENCIES
   autoprefixer-rails
   bcrypt
   bcrypt_pbkdf
+  bootstrap (~> 4.5.0)
   bootstrap-sass
   capistrano
   capistrano-bundler
@@ -409,6 +417,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   pg
+  popper_js (~> 1.16.0)
   pry
   puma
   rack-cors
@@ -430,6 +439,7 @@ DEPENDENCIES
   webpacker
   will_paginate
   will_paginate-bootstrap
+  will_paginate-bootstrap4
 
 RUBY VERSION
    ruby 2.7.0p0
