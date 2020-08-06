@@ -13,4 +13,5 @@ $(document).ready(() => {
 
 $(window).on('beforeunload', () => {
   $.post("/users/unload", { user: current_user, room: room })
+  console.log("unloaded")
 });
