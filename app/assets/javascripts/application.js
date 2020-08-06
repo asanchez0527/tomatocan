@@ -8,12 +8,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require accordian.js
-//= require analytics.js
-//= require autofill.js
-//= require countdown_clock.js
-//= require hideUploaders.js
-//= require livestream.js
-//= require moreorless.js
-//= require popovers.js
-//= require purchases.js
+//= require_tree .
