@@ -12,7 +12,7 @@ consumer.subscriptions.create("ViewerChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
-    console.log("received new message")
+    console.log("Data Received")
     $.get("/conversations/attendees", {user: data.content.user, owner: data.content.owner, room: data.content.room}, (data) => {
       $("#attendees").html(data.html)
     })

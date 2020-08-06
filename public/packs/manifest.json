@@ -1,24 +1,24 @@
 {
-  "application.js": "/packs/js/application-f85123b5429004ede607.js",
-  "application.js.map": "/packs/js/application-f85123b5429004ede607.js.map",
+  "application.js": "/packs/js/application-8abff8a6f291b0b10e2f.js",
+  "application.js.map": "/packs/js/application-8abff8a6f291b0b10e2f.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-f85123b5429004ede607.js"
+        "/packs/js/application-8abff8a6f291b0b10e2f.js"
       ],
       "js.map": [
-        "/packs/js/application-f85123b5429004ede607.js.map"
+        "/packs/js/application-8abff8a6f291b0b10e2f.js.map"
       ]
     },
     "viewer": {
       "js": [
-        "/packs/js/viewer-4baea090f25f0044c211.js"
+        "/packs/js/viewer-95ef0002ab155990428c.js"
       ],
       "js.map": [
-        "/packs/js/viewer-4baea090f25f0044c211.js.map"
+        "/packs/js/viewer-95ef0002ab155990428c.js.map"
       ]
     }
   },
-  "viewer.js": "/packs/js/viewer-4baea090f25f0044c211.js",
-  "viewer.js.map": "/packs/js/viewer-4baea090f25f0044c211.js.map"
+  "viewer.js": "/packs/js/viewer-95ef0002ab155990428c.js",
+  "viewer.js.map": "/packs/js/viewer-95ef0002ab155990428c.js.map"
 }

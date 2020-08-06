@@ -12,15 +12,3 @@ $(document).ready(() => {
 
   loadAttendees()
 })
-
-function loadAttendees() {
-  $.get("/conversations/attendees", {user: current_user, owner: owner, room: room}, (data) => {
-    $("#attendees").html(data.html)
-  })
-}
-
-$(window).on('beforeunload', () => {
-  $.post("/users/unload", { user: current_user, room: room })
-  console.log("unloaded")
-});
-
