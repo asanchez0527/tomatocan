@@ -10,12 +10,15 @@
     <% end %>
 
     <meta name="viewport" content="width=devicewidth, initial-scale=1">
+    <%= render 'application/favicon' %>
+
     <title><%= full_title(yield(:title)) + " " + @user.name %></title>
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "https://js.stripe.com/v2/", "application", 'data-turbolinks-track' => true %>
+    
     <%= csrf_meta_tags %>
-    <%= render 'application/favicon' %>
+
 
     <% if Rails.env.development? || Rails.env.test? %>
       <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
