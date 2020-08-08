@@ -10,6 +10,7 @@ $baseFontFamily: Arial,Helvetica !default;
 //Bootstrap files
 //@import "bootstrap-sprockets";
 
+$icon-font-path: 'bootstrap/';
 @import "bootstrap";
 @import "font-awesome";
 //Global styles
