@@ -1,10 +1,9 @@
 <% if user_signed_in? %>
-  <%= javascript_pack_tag "viewer" %>
-
   <!-- Update list of users attending the conversation -->
   <div class = "container-fluid">
-  <%= content_tag :div, nil, id: "user_vars", data: {user: current_user.id, owner: @user.id, room: params[:chatrm]} %>
   <% content_for :head do %>
+    <%= content_tag :div, nil, id: "user_vars", data: {user: current_user.id, owner: @user.id, room: params[:chatrm]} %>
+    <%= javascript_pack_tag "viewer" %>
     <meta property="og:url"           content="<%= "https://www.thinq.tv" + user_profile_path(@user.permalink) %>" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Join <%= @user.permalink %>'s Conversation" />
@@ -96,15 +95,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-  $(window).on('beforeunload', (event) => {
-      // remove user from attendees list
-      $.post("/users/unload", {user: "<%= current_user.id %>", room: "<%= params[:chatrm] %>"})
-      console.log("User Unloaded")
-    });
-  </script>
-
 <% else %>
   <meta http-equiv="refresh" content="0; URL=/login"/>
 <% end %>

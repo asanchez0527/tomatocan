@@ -1,14 +1,9 @@
-var current_user;
-var owner;
-var room;
+var current_user = $("#user_vars").data("user")
+var owner = $("#user_vars").data("owner")
+var room = $("#user_vars").data("room")
 
-$(document).ready(() => {
-  // get session variables
-  current_user = $("#user_vars").data("user")
-  owner = $("#user_vars").data("owner")
-  room = $("#user_vars").data("room")
-
-  $.post("/users/load", { room: room, user: current_user, owner: owner })
-
-  loadAttendees()
+$(window).on("beforeunload", () => {
+  console.log("unloading user")
+  $.post("/users/unload", {user: current_user, room: room})
 })
+
