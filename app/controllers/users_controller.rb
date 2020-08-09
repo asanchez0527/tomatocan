@@ -222,14 +222,7 @@ class UsersController < ApplicationController
   end
 
   def resolve_layout
-    case action_name
-    when "index", "youtubers", "supportourwork", "stripe_callback"
-      'application'
-    when "profileinfo", "changepassword"
-      'editinfotemplate'
-    else
-      'userpgtemplate'
-    end
+    'application'
   end
 
   def set_user

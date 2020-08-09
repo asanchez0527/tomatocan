@@ -1,27 +1,27 @@
-<div class="container-fluid" >
+<!-- Meta Tags for Facebook Share -->
+<% content_for :head do %>
+  <meta property="og:url" content="<%= "https://www.thinq.tv" + user_profile_path(@user.permalink) %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="View <%= @user.name %>'s profile on ThinQ.tv" />
+  <meta property="og:description"
+    content="Connect with <%= @user.permalink %> in talking about <%= @user.genre1 %>, <%= @user.genre2 %>, <%= @user.genre3 %>" />
+  <% if @user.profilepic.present? %>
+    <meta property="og:image" content="<%= @user.profilepic.url.to_s %>" />
+  <% else %>
+    <meta property="og:image" content="https://www.thinq.tv/logoDigitalHollow300.png" />
+  <% end %>
+<% end %>
 
-    <!-- Meta Tags for Facebook Share -->
-    <% content_for :head do %>
-      <meta property="og:url"           content="<%= "https://www.thinq.tv" + user_profile_path(@user.permalink) %>" />
-      <meta property="og:type"          content="website" />
-      <meta property="og:title"         content="View <%= @user.name %>'s profile on ThinQ.tv" />
-      <meta property="og:description"   content="Connect with <%= @user.permalink %> in talking about <%= @user.genre1 %>, <%= @user.genre2 %>, <%= @user.genre3 %>" />
-      <% if @user.profilepic.present? %>
-        <meta property="og:image"       content="<%= @user.profilepic.url.to_s %>" />
-      <% else %>
-        <meta property="og:image"       content="https://www.thinq.tv/logoDigitalHollow300.png" />
-      <% end %>
-    <% end %>
-    
-    <%= render 'layouts/authorform' %>
-    
-    <% if @displayconvo.present? && @displayconvo.user_id == @user.id %>
-      <div id="eventCurrentdiv" style="text-align: center;">
-        <h3>We're talking about <%= @displayconvo.name %></h3>  
-        <p> right NOW!   </p> 
-        <%= link_to " Join " + @displayconvo.topic, user_viewer_path(@user.permalink, chatrm: @displayconvo.topic, event: @displayconvo.id ), class: "btn btn-primary btn-lg", style: "margin-top: 10px; margin-bottom: 10px; border-radius: 5px; font-size: 30px" %>
-        <br>
-      </div>
+<div class="container-fluid">
+  <%= render 'layouts/authorform' %>
+
+  <% if @displayconvo.present? && @displayconvo.user_id == @user.id %>
+    <div id="eventCurrentdiv" style="text-align: center;">
+      <h3>We're talking about <%= @displayconvo.name %></h3>
+      <p> right NOW! </p>
+      <%= link_to " Join " + @displayconvo.topic, user_viewer_path(@user.permalink, chatrm: @displayconvo.topic, event: @displayconvo.id ), class: "btn btn-primary btn-lg", style: "margin-top: 10px; margin-bottom: 10px; border-radius: 5px; font-size: 30px" %>
+      <br>
+    </div>
   <% else %>
     <div class="row" style="padding-top:15px;padding-bottom:30px;">
       <%= render 'layouts/streamButton' %>
@@ -30,7 +30,8 @@
 
   <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %> alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
       <%= value %>
     </div>
   <% end %>

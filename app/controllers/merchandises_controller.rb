@@ -73,11 +73,6 @@ end
     end
 
     def resolve_layout
-      case action_name
-      when "show", "edit"
-        'userpgtemplate'
-      else
-        'application'
-      end
+      'application'
     end
 end

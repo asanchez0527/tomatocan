@@ -180,12 +180,7 @@ class StaticPagesController < ApplicationController
   end
 
   def resolve_layout
-    case action_name
-    when "home"
-      'homepg'
-    else
-      'application'
-    end
+    'application'
   end
 
 end

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-
-  <% if content_for?(:head) %>
-    <%= yield(:head) %>
-  <% end %>
-
-  <% if content_for? :forusers %>
-    <%= yield :forusers %>
-  <% end %>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= render 'application/favicon' %>
+  
+  <% if content_for?(:head) %>
+  <%= yield(:head) %>
+  <% end %>
+
+  <% if content_for? :forusers %>
+  <%= yield :forusers %>
+  <% end %>
 
   <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -26,20 +26,16 @@
   <% else %>
     <%= tag :meta, :name => "stripe-key", :content => Rails.application.credentials.STRIPE_PUBLIC_KEY %>
   <% end %>
-
 </head>
 
 <body class="pt-5">
+  <%= render 'layouts/header' %>
 
-    <%= render 'layouts/header' %>
+  <main>
+    <%= yield %>
+  </main>
 
-    <main id="absoluteWrapper ">
-      <%= yield %>
-    </main>
-
-    <%= render 'layouts/footer' %>
-
-    
-
+  <%= render 'layouts/footer' %>
 </body>
+
 </html>

@@ -6,4 +6,3 @@ $(window).on("beforeunload", () => {
   console.log("unloading user")
   $.post("/users/unload", {user: current_user, room: room})
 })
-
