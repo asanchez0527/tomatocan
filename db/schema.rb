@@ -46,6 +46,12 @@ ActiveRecord::Schema.define(version: 201309200000000) do
     t.string "bkvideodesc2"
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.string "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "events", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "start_at"
@@ -234,7 +240,6 @@ ActiveRecord::Schema.define(version: 201309200000000) do
     t.text "blockedBy", default: [], array: true
     t.text "BlockedUsers", default: [], array: true
     t.text "last_viewed", default: [], array: true
-    t.json "stats", default: [], array: true
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["permalink"], name: "index_users_on_permalink", unique: true
