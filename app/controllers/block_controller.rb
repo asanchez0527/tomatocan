@@ -21,7 +21,7 @@ class BlockController < ApplicationController
             to_block.update({'blockedBy': array << owner.permalink})        # add owner of convo to blockedBy array
             owner.update({'BlockedUsers': array2 << to_block.permalink})    # add user to be blocked to owner's BlockedUsers array
         end
-        
+
         # return 200 ok
         head :ok
     end
@@ -37,7 +37,7 @@ class BlockController < ApplicationController
         # remove current_user from blockedBy array
         array = array - [current_user.permalink]
         to_unblock.update({'blockedBy': array})
-        
+
         # get blockedUsers array
         array = current_user.BlockedUsers
 
@@ -58,6 +58,15 @@ class BlockController < ApplicationController
         array = array - [params[:room]]
         current_user.update({'last_viewed': array})
         ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
+        if params[:event] == nil || params[:event] == ""
+          attendance_log = Attendance.find_by(user_id: params[:currentUser], time_out: nil)
+        else  
+          attendance_log = Attendance.find_by(user_id: params[:currentUser], event_id: params[:event], time_out: nil)
+        end
+
+        attendance_log.time_out = Time.now - 7.hours
+        attendance_log.save
+
         # return 200 ok
         head :ok
     end
