@@ -10,6 +10,7 @@
     "channels": "^0.0.4",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "rails-erb-loader": "^5.5.2",
     "turbolinks": "^5.2.0",
     "webpack": "^4.44.1"
   },
