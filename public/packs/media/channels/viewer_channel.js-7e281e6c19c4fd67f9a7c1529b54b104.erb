@@ -1,0 +1,26 @@
+import consumer from "./consumer";
+consumer.subscriptions.create("ViewerChannel", {
+  connected: function connected() {
+    // Called when the subscription is ready for use on the server
+    console.log("Connected to the room!");
+  },
+  disconnected: function disconnected() {// Called when the subscription has been terminated by the server
+  },
+  received: function received(data) {
+    // Called when there's incoming data on the websocket for this channel
+    console.log("Data Received");
+
+    if (data.content.type = "new_user") {
+      // console.log("welcome")
+      // var attendee = document.createElement("div")
+      // var name = document.createTextNode(data.content.name)
+      // attendee.id = data.content.id
+      // attendee.className = "attendee"
+      // attendee.appendChild(name)
+      // document.getElementById("attendees").appendChild(attendee)
+      alert("loaded");
+    }
+  }
+});
+dsai;
+gjhdkjfhlk;

@@ -1,8 +1,10 @@
 class BlockController < ApplicationController
+    @attendees_array = []
+
     def load
-        current_user = User.find_by_id(params[:user])
-        current_user.update_column(:last_viewed, current_user.last_viewed << params[:room])
-        ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
+        @attendees_array << params[:id]
+        puts "\n\n\n\n\n\n\n" + @attendees_array.join(', ')
+
         head :ok
     end
               

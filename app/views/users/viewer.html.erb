@@ -1,11 +1,10 @@
 <% if user_signed_in? %>
-  <% current_user.update_column(:last_viewed, current_user.last_viewed << params[:event]) %>
   <% Attendance.new(:user_id => current_user.id, :event_id => params[:event], :time_in => (Time.now - 7.hours)).save %>
 
   <!-- Update list of users attending the conversation -->
   <div class = "container-fluid">
   <% content_for :head do %>
-    <%= content_tag :div, nil, id: "user_vars", data: {user: current_user.id, owner: @user.id, room: params[:chatrm]} %>
+    <%= content_tag :div, nil, id: "user_vars", data: {name: current_user.name, id: current_user.id, room: params[:chatrm], event: params[:event]} %>
     <%= javascript_pack_tag "viewer" %>
     <meta property="og:url"           content="<%= "https://www.thinq.tv" + user_profile_path(@user.permalink) %>" />
     <meta property="og:type"          content="website" />
@@ -18,6 +17,13 @@
     <% end %>
   <% end %>
   
+  <style>
+    .attendee {
+      background-color: yellow;
+      padding-left: 
+    }
+  </style>
+
   <!-- Update list of users attending the conversation -->
   <div class = "container-fluid">
     <div class="row" style="padding-top:45px; margin-left:-60px; margin-right:-60px;">
@@ -60,13 +66,12 @@
                 Attendees of <%= @user.name %>'s conversation 
               <% end %>
             </div>
-            <div id="attendees"></div>
+            <div id="attendees" style="padding: 10px 15px 7px 15px; font-size: 15px;"></div>
           </div>
         </div>
       </div>
 
       <div class="col-md-9">
-        <%= render 'layouts/jitsi' %>
         <% if @otherconvos.present? %>
           <div class="panel panel-primary">
             <div class="panel-heading">
