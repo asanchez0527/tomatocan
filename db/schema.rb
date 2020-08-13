@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 201309200000000) do
   create_table "attendees", force: :cascade do |t|
     t.text "room_type"
     t.integer "user_id"
+    t.text "user_name"
+    t.text "user_permalink"
   end
 
   create_table "books", id: :serial, force: :cascade do |t|

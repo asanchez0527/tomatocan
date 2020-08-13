@@ -18,11 +18,18 @@ consumer.subscriptions.create("ViewerChannel", {
       var currentUserId = $("meta[property='user-id']").attr('content');
       var attendee = document.createElement("div")
       var name = document.createTextNode(data.content.name)
+      var span = document.createElement('span')
+      span.className = "test"
       attendee.id = `user-${data.content.id}`
       attendee.className = "attendee"
-      attendee.appendChild(name)
+      span.appendChild(name)
+      attendee.appendChild(span)
+      span.onclick = () => {
+        window.open(`/${data.content.permalink}`)
+      }
       var button = document.createElement("button")
       button.innerHTML = "Block"
+      button.className = "blockbutton"
       button.onclick = () => {
         if (confirm("Are you sure you want to block " + data.content.name + " from your page?")) {
           $.post("/users/block", {blocker: currentUserId, blockee: data.content.id})

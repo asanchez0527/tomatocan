@@ -19,11 +19,18 @@ $(document).ready(() => {
     data.forEach(element => {
       var attendee = document.createElement("div")
       var name = document.createTextNode(element.user_name)
+      var span = document.createElement('span')
+      span.className = "test"
       attendee.id = `user-${element.user_id}`
       attendee.className = "attendee"
-      attendee.appendChild(name)
+      span.appendChild(name)
+      attendee.appendChild(span)
+      span.onclick = () => {
+        window.open(`/${element.user_permalink}`)
+      }
       var button = document.createElement("button")
       button.innerHTML = "Block"
+      button.className = "blockbutton"
       button.onclick = () => {
         if (confirm("Are you sure you want to block " + element.user_name + " from your page?")) {
           $.post("/users/block", { blocker: id, blockee: element.user_id })
