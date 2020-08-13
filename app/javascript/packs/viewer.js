@@ -14,8 +14,7 @@ $.post("/users/load", {id: id, room: room}, () => {
 })
 
 $(document).ready(() => {
-  alert("ready!")
-  alert(name)
+  
 })
 
 // unload user from database

@@ -5,7 +5,7 @@ class BlockController < ApplicationController
     end
 
     def unload
-        Attendees.where(:user_id => params[:id], :room_type => params[:room]).delete_all
+        Attendees.where(:user_id => params[:id], :room_type => params[:room]).destroy_all
         # # gets the current user
         # current_user = User.find_by_id(params[:user])
 
