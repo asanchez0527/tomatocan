@@ -350,9 +350,6 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     turn (0.9.6)
       ansi
     tzinfo (1.2.7)
@@ -426,7 +423,6 @@ DEPENDENCIES
   simplecov
   simplecov-lcov
   stripe
-  turbolinks
   turn
   uglifier
   unf
