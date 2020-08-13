@@ -1,21 +1,22 @@
 <% if user_signed_in? %>
-  <% Attendance.new(:user_id => current_user.id, :event_id => params[:event], :time_in => (Time.now - 7.hours)).save %>
-
-  <!-- Update list of users attending the conversation -->
-  <div class = "container-fluid">
   <% content_for :head do %>
-    <%= content_tag :div, nil, id: "user_vars", data: {name: current_user.name, id: current_user.id, room: params[:chatrm], event: params[:event]} %>
-    <%= javascript_pack_tag "viewer" %>
-    <meta property="og:url"           content="<%= "https://www.thinq.tv" + user_profile_path(@user.permalink) %>" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Join <%= @user.permalink %>'s Conversation" />
-    <meta property="og:description"   content="<%= @user.permalink %>'s Conversation is happening right now!" />
-    <% if @user.profilepic.present? %>
-      <meta property="og:image"       content="<%= @user.profilepic.url.to_s %>" />
-    <% else %>
-      <meta property="og:image"       content="https://www.thinq.tv/logoDigitalHollow300.png" />
-    <% end %>
+      <%= content_tag :meta, nil, property: "user-name", content: current_user.name %>
+      <%= content_tag :meta, nil, property: "user-id", content: current_user.id %>
+      <%= content_tag :meta, nil, property: "room", content: params[:chatrm] %>
+      <%= content_tag :meta, nil, property: "event", content: params[:event] %>
+      <%= javascript_pack_tag "viewer" %>
+      <meta property="og:url"           content="<%= "https://www.thinq.tv" + user_profile_path(@user.permalink) %>" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="Join <%= @user.permalink %>'s Conversation" />
+      <meta property="og:description"   content="<%= @user.permalink %>'s Conversation is happening right now!" />
+      <% if @user.profilepic.present? %>
+        <meta property="og:image"       content="<%= @user.profilepic.url.to_s %>" />
+      <% else %>
+        <meta property="og:image"       content="https://www.thinq.tv/logoDigitalHollow300.png" />
+      <% end %>
   <% end %>
+
+  <% Attendance.new(:user_id => current_user.id, :event_id => params[:event], :time_in => (Time.now - 7.hours)).save %>
   
   <style>
     .attendee {

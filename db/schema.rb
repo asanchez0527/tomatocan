@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 201309200000000) do
     t.datetime "time_out"
   end
 
+  create_table "attendees", force: :cascade do |t|
+    t.text "room_type"
+    t.integer "user_id"
+  end
+
   create_table "books", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "blurb"
@@ -231,9 +236,8 @@ ActiveRecord::Schema.define(version: 201309200000000) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.text "blockedBy", default: [], array: true
-    t.text "BlockedUsers", default: [], array: true
     t.text "last_viewed", default: [], array: true
+    t.text "blocked_from", default: [], array: true
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["permalink"], name: "index_users_on_permalink", unique: true

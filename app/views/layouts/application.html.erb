@@ -8,11 +8,11 @@
   <%= render 'application/favicon' %>
   
   <% if content_for?(:head) %>
-  <%= yield(:head) %>
+    <%= yield(:head) %>
   <% end %>
 
-  <% if content_for? :forusers %>
-  <%= yield :forusers %>
+  <% if content_for?(:forusers) %>
+    <%= yield :forusers %>
   <% end %>
 
   <title><%= full_title(yield(:title)) %></title>

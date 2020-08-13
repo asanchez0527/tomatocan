@@ -1,10 +1,6 @@
 class BlockController < ApplicationController
-    @attendees_array = []
-
     def load
-        @attendees_array << params[:id]
-        puts "\n\n\n\n\n\n\n" + @attendees_array.join(', ')
-
+        Attendees.new(:user_id => params[:id], :room_type => params[:room]).save
         head :ok
     end
               
@@ -52,22 +48,22 @@ class BlockController < ApplicationController
     end
 
     def unload
-        # gets the current user
-        current_user = User.find_by_id(params[:user])
+        # # gets the current user
+        # current_user = User.find_by_id(params[:user])
 
-        # remove the current event from user's last_viewed array
-        array = current_user.last_viewed
-        array = array - [params[:room]]
-        current_user.update({'last_viewed': array})
-        ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
-        if params[:event] == nil || params[:event] == ""
-          attendance_log = Attendance.find_by(user_id: params[:currentUser], time_out: nil)
-        else  
-          attendance_log = Attendance.find_by(user_id: params[:currentUser], event_id: params[:event], time_out: nil)
-        end
+        # # remove the current event from user's last_viewed array
+        # array = current_user.last_viewed
+        # array = array - [params[:room]]
+        # current_user.update({'last_viewed': array})
+        # ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
+        # if params[:event] == nil || params[:event] == ""
+        #   attendance_log = Attendance.find_by(user_id: params[:currentUser], time_out: nil)
+        # else  
+        #   attendance_log = Attendance.find_by(user_id: params[:currentUser], event_id: params[:event], time_out: nil)
+        # end
 
-        attendance_log.time_out = Time.now - 7.hours
-        attendance_log.save
+        # attendance_log.time_out = Time.now - 7.hours
+        # attendance_log.save
 
         # return 200 ok
         head :ok
