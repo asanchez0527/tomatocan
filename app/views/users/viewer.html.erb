@@ -17,15 +17,26 @@
       <% end %>
   <% end %>
 
-  <% Attendance.new(:user_id => current_user.id, :event_id => params[:event], :time_in => (Time.now - 7.hours)).save %>
-  
+  <!-- Im sorry I put this garbbage in your code but its the only place that I could get it to work so someone else is going 
+  to have to figure out what css file to put it in -->
   <style>
     .attendee {
-      background-color: yellow;
-      padding-left: 
+      padding: .3em 0em .3em 0em;
+    }
+    .blockbutton {
+      border-radius: .3em;
+      float: right;
+      background-color: #8C1D40;
+      color: white;
+    }
+    .test{
+      cursor: pointer;
+      color: #8C1D40;
     }
   </style>
 
+  <% Attendance.new(:user_id => current_user.id, :event_id => params[:event], :time_in => (Time.now - 7.hours)).save %>
+  
   <!-- Update list of users attending the conversation -->
   <div class = "container-fluid">
     <div class="row" style="padding-top:45px; margin-left:-60px; margin-right:-60px;">
@@ -104,14 +115,6 @@
       </div>
     </div>
   </div>
-  <script>
-  $(window).on("beforeunload", () => {
-    console.log("unloading user")
-    $.post("/users/unload", {id: '<%= current_user.id %>', room: '<%= params[:chatrm] %>'}, () => {
-      console.log("user unloaded")
-    })
-  })
-  </script>
 <% else %>
   <meta http-equiv="refresh" content="0; URL=/login"/>
 <% end %>

@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 201309200000000) do
   create_table "attendees", force: :cascade do |t|
     t.text "room_type"
     t.integer "user_id"
+    t.text "user_name"
+    t.text "user_permalink"
   end
 
   create_table "books", id: :serial, force: :cascade do |t|
@@ -49,12 +51,6 @@ ActiveRecord::Schema.define(version: 201309200000000) do
     t.text "youtube2"
     t.string "bkvideodesc1"
     t.string "bkvideodesc2"
-  end
-
-  create_table "chats", force: :cascade do |t|
-    t.string "message"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "events", id: :serial, force: :cascade do |t|
