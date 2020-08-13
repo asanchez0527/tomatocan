@@ -1,12 +1,13 @@
 class BlockController < ApplicationController
     def load
-        Attendees.new(:user_id => params[:id], :room_type => params[:room]).save
-        ActionCable.server.broadcast "viewer_channel", content: {id: params[:id], room: params[:room]}
+        Attendees.new(:user_id => params[:id], :room_type => params[:room], :user_name => params[:name], :user_permalink => params[:permalink]).save
+        ActionCable.server.broadcast "viewer_channel", content: {type: "join", id: params[:id], room: params[:room], name: params[:name], permalink: params[:permalink]}
         head :ok
     end
 
     def unload
         Attendees.where(:user_id => params[:id], :room_type => params[:room]).destroy_all
+        ActionCable.server.broadcast "viewer_channel", content: {type: "leave", id: params[:id], room: params[:room]}
         # # gets the current user
         # current_user = User.find_by_id(params[:user])
 
@@ -31,8 +32,8 @@ class BlockController < ApplicationController
 
     def block
         # get person to block and owner of convo
-        to_block = User.find_by_id(params[:to_block])
-        owner = User.find_by_id(params[:owner])
+        blocker = User.find_by_id(params[:blocker])
+        blockee = User.find_by_id(params[:blockee])
 
         # get blockedBy array and BlockedUsers array
         array = to_block.blockedBy

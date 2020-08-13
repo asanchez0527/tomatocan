@@ -100,16 +100,46 @@
 var name = $("meta[property='user-name']").attr('content');
 var id = $("meta[property='user-id']").attr('content');
 var room = $("meta[property='room']").attr('content');
-var event = $("meta[property='event']").attr('content'); // load user to attendees table
+var event = $("meta[property='event']").attr('content');
+var permalink = $("meta[property='permalink']").attr('content'); // load user to attendees table
 
 console.log("loading user");
 $.post("/users/load", {
   id: id,
-  room: room
+  room: room,
+  name: name,
+  permalink: permalink
 }, function () {
   console.log("user loaded");
 });
-$(document).ready(function () {}); // unload user from database
+$(document).ready(function () {
+  $.post("/conversations/attendees", {
+    room: room
+  }, function (data) {
+    data.forEach(function (element) {
+      console.log(element);
+      var attendee = document.createElement("div");
+      var name = document.createTextNode(element.user_name);
+      attendee.id = "user-".concat(element.user_id);
+      attendee.className = "attendee";
+      attendee.appendChild(name);
+      var button = document.createElement("button");
+      button.innerHTML = "Block";
+
+      button.onclick = function () {
+        if (confirm("Are you sure you want to block " + data.content.name + " from your page?")) {
+          $.post("/users/block", {
+            blocker: id,
+            to_block: element.user_id
+          });
+        }
+      };
+
+      attendee.appendChild(button);
+      $("#attendees").append(attendee);
+    });
+  });
+}); // unload user from database
 
 $(window).on("beforeunload", function () {
   console.log("unloading user");
@@ -119,11 +149,7 @@ $(window).on("beforeunload", function () {
   }, function () {
     console.log("user unloaded");
   });
-}); // // function block(name, blocker, blockee) {
-// //   if (confirm("Are you sure you want to block " + name + " from your page?")) {
-// //     $.post("/users/block", {blocker: blocker, to_block: blockee})
-// //   }
-// // }
+});
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery/src/jquery */ "./node_modules/jquery/src/jquery.js")))
 
 /***/ }),
@@ -11213,4 +11239,4 @@ __webpack_require__(/*! ./traversing */ "./node_modules/jquery/src/traversing.js
 /***/ })
 
 /******/ });
-//# sourceMappingURL=viewer-ca7dfb507196ea14e0df.js.map
+//# sourceMappingURL=viewer-844a75a2eebbacb06611.js.map

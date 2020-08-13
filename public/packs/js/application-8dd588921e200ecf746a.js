@@ -94,7 +94,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./viewer_channel.js": "./app/javascript/channels/viewer_channel.js.erb"
+	"./viewer_channel.js": "./app/javascript/channels/viewer_channel.js"
 };
 
 
@@ -152,16 +152,16 @@ channels.keys().forEach(channels);
 
 /***/ }),
 
-/***/ "./app/javascript/channels/viewer_channel.js.erb":
-/*!*******************************************************!*\
-  !*** ./app/javascript/channels/viewer_channel.js.erb ***!
-  \*******************************************************/
+/***/ "./app/javascript/channels/viewer_channel.js":
+/*!***************************************************!*\
+  !*** ./app/javascript/channels/viewer_channel.js ***!
+  \***************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _consumer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./consumer */ "./app/javascript/channels/consumer.js");
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _consumer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./consumer */ "./app/javascript/channels/consumer.js");
 
 _consumer__WEBPACK_IMPORTED_MODULE_0__["default"].subscriptions.create("ViewerChannel", {
   connected: function connected() {
@@ -172,18 +172,37 @@ _consumer__WEBPACK_IMPORTED_MODULE_0__["default"].subscriptions.create("ViewerCh
   },
   received: function received(data) {
     // Called when there's incoming data on the websocket for this channel
-    console.log("Data Received"); //   console.log("welcome " + data.content.name)
-    //   var attendee = document.createElement("div")
-    //   var name = document.createTextNode(data.content.name)
-    //   attendee.id = data.content.id
-    //   attendee.className = "attendee"
-    //   attendee.appendChild(name)
-    //   var button = document.createElement("button")
-    //   button.innerHTML = "block"
-    //   attendee.appendChild(button)
-    //   $("#attendees").append(attendee)
+    console.log("Data Received");
+
+    if (data.content.type == "join") {
+      console.log("user ".concat(data.content.id, " joined the room"));
+      var currentUserId = $("meta[property='user-id']").attr('content');
+      var attendee = document.createElement("div");
+      var name = document.createTextNode(data.content.name);
+      attendee.id = "user-".concat(data.content.id);
+      attendee.className = "attendee";
+      attendee.appendChild(name);
+      var button = document.createElement("button");
+      button.innerHTML = "Block";
+
+      button.onclick = function () {
+        if (confirm("Are you sure you want to block " + data.content.name + " from your page?")) {
+          $.post("/users/block", {
+            blocker: currentUserId,
+            blockee: data.content.id
+          });
+        }
+      };
+
+      attendee.appendChild(button);
+      $("#attendees").append(attendee);
+    } else if (data.content.type == "leave") {
+      $("#user-".concat(data.content.id)).remove();
+      console.log("user ".concat(data.content.id, " left the room"));
+    }
   }
 });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery/src/jquery */ "./node_modules/jquery/src/jquery.js")))
 
 /***/ }),
 
@@ -23450,4 +23469,4 @@ module.exports = function (module) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=application-56e4fd4dc1581e132a9a.js.map
+//# sourceMappingURL=application-8dd588921e200ecf746a.js.map

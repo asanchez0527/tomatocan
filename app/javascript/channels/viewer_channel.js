@@ -13,6 +13,27 @@ consumer.subscriptions.create("ViewerChannel", {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     console.log("Data Received")
-    $("#attendees").append("<div class=attendee>" + data.content.id + "</div>")
+    if (data.content.type == "join") {
+      console.log(`user ${data.content.id} joined the room`)
+      var currentUserId = $("meta[property='user-id']").attr('content');
+      var attendee = document.createElement("div")
+      var name = document.createTextNode(data.content.name)
+      attendee.id = `user-${data.content.id}`
+      attendee.className = "attendee"
+      attendee.appendChild(name)
+      var button = document.createElement("button")
+      button.innerHTML = "Block"
+      button.onclick = () => {
+        if (confirm("Are you sure you want to block " + data.content.name + " from your page?")) {
+          $.post("/users/block", {blocker: currentUserId, blockee: data.content.id})
+        }
+      }
+      attendee.appendChild(button)
+      $("#attendees").append(attendee)
+    }
+    else if (data.content.type == "leave") {
+      $(`#user-${data.content.id}`).remove()
+      console.log(`user ${data.content.id} left the room`)
+    }
   }
 });
