@@ -36,14 +36,11 @@ class BlockController < ApplicationController
         blockee = User.find_by_id(params[:blockee])
 
         # get blockedBy array and BlockedUsers array
-        array = to_block.blockedBy
-        array2 = owner.BlockedUsers
+        array = blockee.blocked_from
 
         # check if user has already been blocked
-        unless array2.include? (to_block.permalink)
-            to_block.update({'blockedBy': array << owner.permalink})        # add owner of convo to blockedBy array
-            owner.update({'BlockedUsers': array2 << to_block.permalink})    # add user to be blocked to owner's BlockedUsers array
-        end
+        blockee.update({'blocked_from': array << blocker.permalink})
+        ActionCable.server.broadcast "viewer_channel", content: {type: "block", permalink: blockee.permalink}
 
         # return 200 ok
         head :ok
@@ -73,7 +70,8 @@ class BlockController < ApplicationController
     end
 
     def is_blocked
-        render plain: current_user.blockedBy, content_type: 'text/plain'
+        user = User.find_by_permalink(params[:permalink])
+        render plain: user.blocked_from, content_type: 'text/plain'
     end
 
     def loadAttendees

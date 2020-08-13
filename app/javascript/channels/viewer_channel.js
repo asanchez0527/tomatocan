@@ -34,6 +34,10 @@ consumer.subscriptions.create("ViewerChannel", {
     else if (data.content.type == "leave") {
       $(`#user-${data.content.id}`).remove()
       console.log(`user ${data.content.id} left the room`)
+    } else if (data.content.type == "block") {
+      $.post("/users/is_blocked", {id: currentUserId}, (data) => {
+        console.log(data)
+      })
     }
   }
 });
