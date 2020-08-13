@@ -14,7 +14,11 @@ $.post("/users/load", {id: id, room: room}, () => {
 })
 
 $(document).ready(() => {
-  
+  $.post("/conversations/attendees", {room: room}, (data) => {
+    data.forEach(element => {
+      $("#attendees").append("<div class=attendee>" + element.user_id + "</div>")
+    });
+  })
 })
 
 // unload user from database

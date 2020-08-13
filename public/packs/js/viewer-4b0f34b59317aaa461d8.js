@@ -110,14 +110,20 @@ $.post("/users/load", {
   console.log("user loaded");
 });
 $(document).ready(function () {
-  alert("ready!");
-  alert(name);
+  $.post("/conversations/attendees", {
+    room: room
+  }, function (data) {
+    data.array.forEach(function (element) {
+      console.log(element);
+    });
+  });
 }); // unload user from database
 
 $(window).on("beforeunload", function () {
   console.log("unloading user");
   $.post("/users/unload", {
-    user: id
+    id: id,
+    room: room
   }, function () {
     console.log("user unloaded");
   });
@@ -11215,4 +11221,4 @@ __webpack_require__(/*! ./traversing */ "./node_modules/jquery/src/traversing.js
 /***/ })
 
 /******/ });
-//# sourceMappingURL=viewer-ab46ddbc4a3c7d9faade.js.map
+//# sourceMappingURL=viewer-4b0f34b59317aaa461d8.js.map
