@@ -1,6 +1,7 @@
 class BlockController < ApplicationController
     def load
         Attendees.new(:user_id => params[:id], :room_type => params[:room]).save
+        ActionCable.server.broadcast "viewer_channel", content: {id: params[:id], room: params[:room]}
         head :ok
     end
 
@@ -76,7 +77,9 @@ class BlockController < ApplicationController
 
     def loadAttendees
         # return attendees layout
-        render :json => {:success => true, :html => (render_to_string partial: "layouts/attendees")}
+        current_attendees = Attendees.where(:room_type => params[:room])
+        render :json => current_attendees
+        # render :json => {:success => true, :html => (render_to_string partial: "layouts/attendees")}
     end
 
     def liveCount
