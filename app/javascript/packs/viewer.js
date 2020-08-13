@@ -21,7 +21,7 @@ $(document).ready(() => {
 // unload user from database
 $(window).on("beforeunload", () => {
   console.log("unloading user")
-  $.post("/users/unload", {user: id}, () => {
+  $.post("/users/unload", {id: id, room: room}, () => {
     console.log("user unloaded")
   })
 })

@@ -3,6 +3,29 @@ class BlockController < ApplicationController
         Attendees.new(:user_id => params[:id], :room_type => params[:room]).save
         head :ok
     end
+
+    def unload
+        Attendees.where(:user_id => params[:id], :room_type => params[:room]).delete_all
+        # # gets the current user
+        # current_user = User.find_by_id(params[:user])
+
+        # # remove the current event from user's last_viewed array
+        # array = current_user.last_viewed
+        # array = array - [params[:room]]
+        # current_user.update({'last_viewed': array})
+        # ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
+        # if params[:event] == nil || params[:event] == ""
+        #   attendance_log = Attendance.find_by(user_id: params[:currentUser], time_out: nil)
+        # else  
+        #   attendance_log = Attendance.find_by(user_id: params[:currentUser], event_id: params[:event], time_out: nil)
+        # end
+
+        # attendance_log.time_out = Time.now - 7.hours
+        # attendance_log.save
+
+        # return 200 ok
+        head :ok
+    end
               
 
     def block
@@ -42,28 +65,6 @@ class BlockController < ApplicationController
         # remove to_unblock from blockedUsers array
         array = array - [to_unblock.permalink]
         current_user.update({'BlockedUsers': array})
-
-        # return 200 ok
-        head :ok
-    end
-
-    def unload
-        # # gets the current user
-        # current_user = User.find_by_id(params[:user])
-
-        # # remove the current event from user's last_viewed array
-        # array = current_user.last_viewed
-        # array = array - [params[:room]]
-        # current_user.update({'last_viewed': array})
-        # ActionCable.server.broadcast "viewer_channel", content: {user: params[:user], room: params[:room], owner: params[:owner]}
-        # if params[:event] == nil || params[:event] == ""
-        #   attendance_log = Attendance.find_by(user_id: params[:currentUser], time_out: nil)
-        # else  
-        #   attendance_log = Attendance.find_by(user_id: params[:currentUser], event_id: params[:event], time_out: nil)
-        # end
-
-        # attendance_log.time_out = Time.now - 7.hours
-        # attendance_log.save
 
         # return 200 ok
         head :ok
