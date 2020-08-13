@@ -2,6 +2,7 @@
   <% content_for :head do %>
       <%= content_tag :meta, nil, property: "user-name", content: current_user.name %>
       <%= content_tag :meta, nil, property: "user-id", content: current_user.id %>
+      <%= content_tag :meta, nil, property: "user-permalink", content: current_user.permalink %>
       <%= content_tag :meta, nil, property: "room", content: params[:chatrm] %>
       <%= content_tag :meta, nil, property: "event", content: params[:event] %>
       <%= content_tag :meta, nil, property: "og:url", content: "https://www.thinq.tv" + user_profile_path(@user.permalink) %>
