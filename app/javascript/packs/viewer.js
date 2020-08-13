@@ -18,12 +18,12 @@ $(document).ready(() => {
 })
 
 // unload user from database
-$(window).on("beforeunload", () => {
-  console.log("unloading user")
-  $.post("/users/unload", {id: id, room: room}, () => {
-    console.log("user unloaded")
-  })
-})
+// $(window).on("beforeunload", () => {
+//   console.log("unloading user")
+//   $.post("/users/unload", {id: id, room: room}, () => {
+//     console.log("user unloaded")
+//   })
+// })
 
 // // function block(name, blocker, blockee) {
 // //   if (confirm("Are you sure you want to block " + name + " from your page?")) {
