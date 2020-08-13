@@ -103,6 +103,14 @@
       </div>
     </div>
   </div>
+  <script>
+  $(window).on("beforeunload", () => {
+    console.log("unloading user")
+    $.post("/users/unload", {id: '<%= current_user.id %>', room: '<%= params[:chatrm] %>'}, () => {
+      console.log("user unloaded")
+    })
+  })
+  </script>
 <% else %>
   <meta http-equiv="refresh" content="0; URL=/login"/>
 <% end %>
